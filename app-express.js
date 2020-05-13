@@ -1,3 +1,16 @@
+/*
+In your terminal:
+> touch app.js
+> npm init -y
+> npm insatll express
+> touch .gitignore
+> npm start
+
+--> you can add files to the .gitignore file
+
+
+*/
+
 const express = require("express");
 const app = express();
 const port = 8001;
@@ -13,14 +26,23 @@ app.get("/dogs", (req, res) => res.send(`Woof`));
 app.get("/cats_and_dogs", (req, res) => res.send(`Living together`));
 
 app.get("/greet/:name", (req, res) => res.send(`Hello, ${req.params.name}`));
-// app.get("/greet/Jamison", (req, res) => res.send(`Hello, ${req.params}`));
-// app.get("/greet/Manny", (req, res) => res.send(`Hello, ${req.params}`));
 
-app.get("/test", (req, res) => {
-  console.log(req.query);
-});
+// req.query.[searchVariable] is called in the url request: "?[searchVariable]=[someValue]"
+// ex: localHost/hello1?name=Joe&age=28"
+
+// app.get("/:name/:age", (req, res) => {
+//   console.log(req.query);
+// });
 
 app.get("/hello1", function (req, res) {
   var name = req.query.name || "world";
-  res.send("Hello " + name + "!");
+  var age = req.query.age || "0";
+  var result = "Hello " + name + ", ";
+  if (age) {
+    result += `you were born in ${2020 - +age}!`;
+  }
+  res.send(result);
 });
+
+// general boolean switch syntax
+// if [boolean] ? this : that

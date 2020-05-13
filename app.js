@@ -8,17 +8,26 @@ app.listen(port, () =>
   console.log(`listening on port http://127.0.0.1:${port}`)
 );
 
-// app.get("/", (req, res) => res.send(data));
 app.get("/cat", (req, res) =>
   res.send(data.filter((animal) => animal.type == "cat"))
 );
+
 app.get("/dog", (req, res) =>
   res.send(data.filter((animal) => animal.type == "dog"))
 );
 
-app.get("/:id", (req, res) =>
-  res.send(data.filter((a) => a.id == req.params.id))
-);
+// put links to all pages in each page
+app.get("/:page", (req, res) => {
+  res.send(`
+  <a href='./legal'>./legal</a><br/>
+  <a href='./about'>./about</a><br/>
+  <a href='./contact'>./contact</a><br/>
+  `);
+});
+
+// app.get("/:id", (req, res) =>
+//   res.send(data.filter((a) => a.id == req.params.id))
+// );
 
 // app.get("/", (req, res) => {
 //   let age = req.query.age;
@@ -52,14 +61,6 @@ app.get("/:id", (req, res) =>
 // app.put("/contact", function (req, res) {
 //   res.send("Got a PUT request at /contact");
 // });
-
-app.get("/", (req, res) => {
-  res.send(`
-  <a href='./legal'>./legal</a><br/>
-  <a href='./about'>./about</a><br/>
-  <a href='./contact'>./contact</a><br/>
-  `);
-});
 
 // app.get("/legal", (req, res) => res.send(`This is Legal`));
 // app.get("/legal/:page", (req, res) => res.send(req.params));
