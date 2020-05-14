@@ -25,6 +25,16 @@ app.get("/:page", (req, res) => {
   `);
 });
 
+
+function radLogger(req, res, next) {
+  console.log(`YOUR REQUEST: `, req.query);
+  next();
+};
+
+app.use(radLogger, express.static('public'));
+
+// app.use(radLogger);
+
 // app.get("/:id", (req, res) =>
 //   res.send(data.filter((a) => a.id == req.params.id))
 // );
