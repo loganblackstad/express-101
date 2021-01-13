@@ -48,15 +48,23 @@ function radLogger(req, res, next) {
   next();
 };
 
-app.use(radLogger, express.static('public'));
+// app.use(radLogger, express.static('public'));
 
 app.use(radLogger);
 
-app.get("/:id", (req, res) =>
-  res.send(data.filter((a) => a.id == req.params.id))
-);
+app.get("/:id", (req, res, next) => {
 
-app.get("/", (req, res) => {
+  const results = data.filter((a) => a.id == req.params.id)
+
+  if (results.length > 0) return res.send(data.filter((a) => a.id == req.params.id))
+
+  next()
+})
+
+app.get("/", (req, res) => res.send(`<h1>An Inspiring Message!</h1>`));
+
+
+app.get("/", (req, res, next) => {
   let age = req.query.age;
   let color = req.query.color;
   let a = [];
@@ -71,30 +79,29 @@ app.get("/", (req, res) => {
   res.json(data.filter((a) => a.id == req.params.id));
 });
 
-// app.get("/", (req, res) => res.send(`<h1>An Inspiring Message!</h1>`));
 
 // app.listen(port, () =>
 //   console.log(`listening on port http://localhost:${port}`)
 // );
 
-// app.put("/legal", function (req, res) {
-//   res.send("Got a PUT request at /legal");
-// });
+app.put("/legal", function (req, res) {
+  res.send("Got a PUT request at /legal");
+});
 
-// app.put("/about", function (req, res) {
-//   res.send("Got a PUT request at /about");
-// });
+app.put("/about", function (req, res) {
+  res.send("Got a PUT request at /about");
+});
 
-// app.put("/contact", function (req, res) {
-//   res.send("Got a PUT request at /contact");
-// });
+app.put("/contact", function (req, res) {
+  res.send("Got a PUT request at /contact");
+});
 
-// app.get("/legal", (req, res) => res.send(`This is Legal`));
-// app.get("/legal/:page", (req, res) => res.send(req.params));
-// app.get("/legal/:page", (req, res) => res.send(req.params.page));
-// app.get("/legal/:page/:bar", (req, res) =>
-//   res.send(`<h1>${req.params.page}</h1>`)
-// );
+app.get("/legal", (req, res) => res.send(`This is Legal`));
+app.get("/legal/:page", (req, res) => res.send(req.params));
+app.get("/legal/:page", (req, res) => res.send(req.params.page));
+app.get("/legal/:page/:bar", (req, res) =>
+  res.send(`<h1>${req.params.page}</h1>`)
+);
 
-// app.get("/about", (req, res) => res.send(`<h1>About Page</h1>`));
-// app.get("/contact", (req, res) => res.send(`<h1>Contact Page</h1>`));
+app.get("/about", (req, res) => res.send(`<h1>About Page</h1>`));
+app.get("/contact", (req, res) => res.send(`<h1>Contact Page</h1>`));
