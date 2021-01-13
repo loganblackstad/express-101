@@ -2,7 +2,7 @@
 In your terminal:
 > touch app.js
 > npm init -y
-> npm insatll express
+> npm install express
 > touch .gitignore
 > npm start
 
@@ -34,7 +34,7 @@ app.get("/greet/:name", (req, res) => res.send(`Hello, ${req.params.name}`));
 //   console.log(req.query);
 // });
 
-app.get("/hello1", function (req, res) {
+app.get("/hello", function (req, res) {
   var name = req.query.name || "world";
   var age = req.query.age || "0";
   var result = "Hello " + name + ", ";
@@ -43,6 +43,8 @@ app.get("/hello1", function (req, res) {
   }
   res.send(result);
 });
+
+// example: http://localhost:8001/hello?name=Logan&age=27
 
 // general boolean switch syntax
 // if [boolean] ? this : that
