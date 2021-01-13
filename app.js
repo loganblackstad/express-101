@@ -1,3 +1,20 @@
+/*
+In your terminal:
+> touch app.js
+> npm init -y
+> npm install express
+> touch .gitignore
+> npm start
+
+> node app.js
+> node app-express.js
+
+--> you can add files to the .gitignore file
+
+
+*/
+
+
 const data = require("./data");
 
 const express = require("express");
@@ -16,14 +33,14 @@ app.get("/dog", (req, res) =>
   res.send(data.filter((animal) => animal.type == "dog"))
 );
 
-// put links to all pages in each page
-app.get("/:page", (req, res) => {
-  res.send(`
-  <a href='./legal'>./legal</a><br/>
-  <a href='./about'>./about</a><br/>
-  <a href='./contact'>./contact</a><br/>
-  `);
-});
+// put links to all pages in each page regardless of express endpoint
+// app.get("/:page", (req, res) => {
+//   res.send(`
+//   <a href='./legal'>./legal</a><br/>
+//   <a href='./about'>./about</a><br/>
+//   <a href='./contact'>./contact</a><br/>
+//   `);
+// });
 
 
 function radLogger(req, res, next) {
@@ -33,26 +50,26 @@ function radLogger(req, res, next) {
 
 app.use(radLogger, express.static('public'));
 
-// app.use(radLogger);
+app.use(radLogger);
 
-// app.get("/:id", (req, res) =>
-//   res.send(data.filter((a) => a.id == req.params.id))
-// );
+app.get("/:id", (req, res) =>
+  res.send(data.filter((a) => a.id == req.params.id))
+);
 
-// app.get("/", (req, res) => {
-//   let age = req.query.age;
-//   let color = req.query.color;
-//   let a = [];
-//   if (age) {
-//     a = data.filter((iter) => iter.age == age);
-//   }
+app.get("/", (req, res) => {
+  let age = req.query.age;
+  let color = req.query.color;
+  let a = [];
+  if (age) {
+    a = data.filter((iter) => iter.age == age);
+  }
 
-//   if (color) {
-//     a = a.filter((iter) => iter.color == color);
-//   }
+  if (color) {
+    a = a.filter((iter) => iter.color == color);
+  }
 
-//   res.json(data.filter((a) => a.id == req.params.id));
-// });
+  res.json(data.filter((a) => a.id == req.params.id));
+});
 
 // app.get("/", (req, res) => res.send(`<h1>An Inspiring Message!</h1>`));
 

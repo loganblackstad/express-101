@@ -6,6 +6,9 @@ In your terminal:
 > touch .gitignore
 > npm start
 
+> node app.js
+> node app-express.js
+
 --> you can add files to the .gitignore file
 
 
