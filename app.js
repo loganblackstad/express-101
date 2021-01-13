@@ -61,9 +61,12 @@ app.get("/:id", (req, res, next) => {
   next()
 })
 
-app.get("/", (req, res) => res.send(`<h1>An Inspiring Message!</h1>`));
+// app.get("/", (req, res, next) => res.send(`<h1>An Inspiring Message!</h1>`));
 
 
+
+// for http requests w params in the URL:
+// ex: http://localhost:8000/?age=3
 app.get("/", (req, res, next) => {
   let age = req.query.age;
   let color = req.query.color;
@@ -76,7 +79,9 @@ app.get("/", (req, res, next) => {
     a = a.filter((iter) => iter.color == color);
   }
 
-  res.json(data.filter((a) => a.id == req.params.id));
+  console.log(a)
+
+  res.json(a);
 });
 
 
