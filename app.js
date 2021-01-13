@@ -22,8 +22,9 @@ const app = express();
 const port = 8000;
 
 // routes
-app.use('/', require('./routes'));
-app.use('/thing', require('./routes/thing'));
+// app.use('/', require('./routes'));  
+app.use('/things', require('./routes/things'));
+
 
 app.listen(port, () =>
   console.log(`listening on port http://127.0.0.1:${port}`)
